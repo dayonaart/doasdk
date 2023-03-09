@@ -1,6 +1,6 @@
 name: newdoasdk
 description: A new Doa SDK
-version: 0.0.1
+version: 0.0.2
 homepage:
 publish_to : none
 environment:
@@ -22,9 +22,6 @@ dependencies:
   camera: ^0.10.3+2
   intl: ^0.18.0
   screenshot: ^1.3.0
-  captcha_solver: ^1.0.4
-  webview_flutter_plus: ^0.3.0+2
-  path_provider: ^2.0.13
 
 dev_dependencies:
   flutter_test:
@@ -50,9 +47,9 @@ flutter:
     platforms:
       android:
         package: id.doa.newdoasdk
-        pluginClass: NewdoasdkPlugin
+        pluginClass: NewDoaSdkPlugin
       ios:
-        pluginClass: NewdoasdkPlugin
+        pluginClass: NewDoaSdkPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   assets:

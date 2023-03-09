@@ -56,8 +56,8 @@ class FaceAndSelfieVerificationHeader extends StatelessWidget {
               height: 152,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  image:
-                      DecorationImage(image: AssetImage(takeFaceAndSelfie)))),
+                  image: DecorationImage(
+                      image: AssetImage(takeFaceAndSelfieAssets)))),
           const SizedBox(height: 24),
           Text("Verifikasi Wajah dan Selfie dengan KTP",
               style: textStyleW600(fontSize: 16)),

@@ -10,4 +10,8 @@ String flipCameraButtonAssets = "packages/newdoasdk/assets/flip_button.png";
 String openingAccountAssets = "packages/newdoasdk/assets/opening_account.png";
 String iAssets = "packages/newdoasdk/assets/i.png";
 String penAssets = "packages/newdoasdk/assets/pen.png";
-String takeFaceAndSelfie = "packages/newdoasdk/assets/take_face_and_selfie.png";
+String recaptchaAssets = "packages/newdoasdk/assets/recaptcha.png";
+String takeFaceAndSelfieAssets =
+    "packages/newdoasdk/assets/take_face_and_selfie.png";
+String zolozBaseUrl = "";
+String recaptchaSiteKey = '';

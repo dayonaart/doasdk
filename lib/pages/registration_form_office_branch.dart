@@ -6,7 +6,6 @@ import 'package:newdoasdk/enum.dart';
 import 'package:newdoasdk/style/colors.dart';
 import 'package:newdoasdk/style/textstyle.dart';
 import 'package:newdoasdk/widget/widgets.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class RegistrationFormOfficeBranch extends StatelessWidget {
   RegistrationFormOfficeBranch({super.key});
@@ -16,42 +15,38 @@ class RegistrationFormOfficeBranch extends StatelessWidget {
   Widget build(BuildContext context) {
     return SAFE_AREA(
         child: SCAFFOLD(
-            appBar: APPBAR(
-                onPressed: () => Get.back(),
-                title: "Registrasi",
-                progressData: 6),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const RegistrationFormOfficeBranchHeader(),
-                  RegistrationFormOfficeBranchField(),
-                  const SizedBox(height: 50),
-                  Container(
-                      margin: const EdgeInsets.only(top: 24, bottom: 16),
-                      height: 8,
-                      color: GREY_BACKGROUND),
-                  RecaptchaForm(),
-                  const SizedBox(height: 156),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Obx(() {
-                      return BUTTON(
-                          radiusCircular: 999,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Text(
-                              "Lanjut",
-                              style: textStyleW600(
-                                  fontSize: 16, fontColor: Colors.white),
-                            ),
-                          ),
-                          onPressed: _controller.next());
-                    }),
-                  ),
-                  const SizedBox(height: 39),
-                ],
+      appBar: APPBAR(
+          onPressed: () => Get.back(), title: "Registrasi", progressData: 6),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const RegistrationFormOfficeBranchHeader(),
+            RegistrationFormOfficeBranchField(),
+            Container(
+                margin: const EdgeInsets.only(top: 24, bottom: 16),
+                height: 8,
+                color: GREY_BACKGROUND),
+            RecaptchaForm(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(bottom: 39, right: 16, left: 16),
+        child: Obx(() {
+          return BUTTON(
+              radiusCircular: 999,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Text(
+                  "Lanjut",
+                  style: textStyleW600(fontSize: 16, fontColor: Colors.white),
+                ),
               ),
-            )));
+              onPressed: _controller.next());
+        }),
+      ),
+    ));
   }
 }
 
@@ -70,52 +65,38 @@ class RecaptchaForm extends StatelessWidget {
           Text("Klik centang di bawah untuk melanjutkan ",
               style: textStyleW500(fontSize: 14)),
           const SizedBox(height: 16),
-          SizedBox(
-            height: 100,
-            child: WebViewPlus(
-              javascriptChannels: {
-                JavascriptChannel(
-                    name: 'Captcha',
-                    onMessageReceived: (JavascriptMessage message) {
-                      // _controller.validateRecaptcha(message.message);
-                    })
-              },
-              // initialUrl: 'packages/newdoasdk/assets/index.html',
-              onWebViewCreated: (controller) {
-                _controller.webviewController = controller;
-                _controller.webviewController.loadString('''<!DOCTYPE html>
-<html>
-<head>
-    <title>reCAPTCHA</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</head>
-<body >
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
-<form action="?" method="POST">
-    <div  class="g-recaptcha"
-         data-sitekey="6Lci4eckAAAAAAIsf1NUpUaSII_HvNR_Q-2zpJV9"
-         data-callback="captchaCallback"></div>
-
-</form>
-<script>
-      function captchaCallback(response){
-        //console.log(response);
-        if(typeof Captcha!=="undefined"){
-          Captcha.postMessage(true);
-        }else{
-          Captcha.postMessage(false);
-        }
-      }
-    </script>
-</body>
-</html>
-
-<html>
-<body>''');
-              },
-              javascriptMode: JavascriptMode.unrestricted,
+          Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            color: BLUE_LIGHT,
+            elevation: 0,
+            margin: const EdgeInsets.all(0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Obx(() {
+                      return GestureDetector(
+                        onTap: _controller.validationRecaptcha(),
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 2, color: BLUE_DARK)),
+                          child: _controller.validationRecaptchaWidget(),
+                        ),
+                      );
+                    }),
+                    const SizedBox(width: 20),
+                    Text("I'm not a robot", style: textStyleW500(fontSize: 16)),
+                    const SizedBox(width: 20),
+                    Image.asset(recaptchaAssets, height: 80, width: 80)
+                  ]),
             ),
           ),
+          const SizedBox(height: 50),
         ],
       ),
     );

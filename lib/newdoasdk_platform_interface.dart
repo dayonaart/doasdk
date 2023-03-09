@@ -2,23 +2,23 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'newdoasdk_method_channel.dart';
 
-abstract class NewdoasdkPlatform extends PlatformInterface {
+abstract class NewDoaSdkPlatform extends PlatformInterface {
   /// Constructs a NewdoasdkPlatform.
-  NewdoasdkPlatform() : super(token: _token);
+  NewDoaSdkPlatform() : super(token: _token);
 
   static final Object _token = Object();
 
-  static NewdoasdkPlatform _instance = MethodChannelNewdoasdk();
+  static NewDoaSdkPlatform _instance = MethodChannelNewDoaSdk();
 
-  /// The default instance of [NewdoasdkPlatform] to use.
+  /// The default instance of [NewDoaSdkPlatform] to use.
   ///
-  /// Defaults to [MethodChannelNewdoasdk].
-  static NewdoasdkPlatform get instance => _instance;
+  /// Defaults to [MethodChannelNewDoaSdk].
+  static NewDoaSdkPlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [NewdoasdkPlatform] when
+  /// platform-specific class that extends [NewDoaSdkPlatform] when
   /// they register themselves.
-  static set instance(NewdoasdkPlatform instance) {
+  static set instance(NewDoaSdkPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }

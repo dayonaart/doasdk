@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
 import 'package:newdoasdk/routes.dart';
 import 'package:newdoasdk/style/colors.dart';
 
@@ -21,11 +20,5 @@ class OnBoardingController extends GetxController {
     return () async {
       return await Get.toNamed(ROUTE.preRegister.name);
     };
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    Get.put(MainController());
   }
 }

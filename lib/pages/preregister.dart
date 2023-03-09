@@ -56,7 +56,9 @@ class PreRegister extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                   child: BUTTON(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await DIALOG_HELPER("UNDER DEVELOP");
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(

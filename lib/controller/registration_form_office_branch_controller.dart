@@ -1,8 +1,10 @@
 import 'package:drop_down_list/drop_down_list.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:newdoasdk/api/api.dart';
+import 'package:newdoasdk/const_path.dart';
 import 'package:newdoasdk/controller/main_controller.dart';
 import 'package:newdoasdk/controller/registration_form_private_controller.dart';
 import 'package:newdoasdk/enum.dart';
@@ -11,11 +13,10 @@ import 'package:newdoasdk/style/colors.dart';
 import 'package:newdoasdk/style/textstyle.dart';
 import 'dart:math' as math;
 
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
+import 'package:newdoasdk/widget/widgets.dart';
 
 class RegistrationFormOfficeBranchController extends GetxController {
   final MainController _mController = Get.find();
-  late WebViewPlusController webviewController;
   String get data => "${_mController.jobDetailFormData}";
   late TextEditingController provinceTxtController,
       subDistrictTxtController,
@@ -24,7 +25,8 @@ class RegistrationFormOfficeBranchController extends GetxController {
   RxList<AddressModel?> provinceList = RxList();
   RxList<AddressModel?> subDistrictList = RxList();
   RxList<AddressModel?> officeBrachList = RxList();
-  // RxBool _recaptchaValidation = RxBool(false);
+  final RxBool _recaptchaValidation = RxBool(false);
+  final RxBool _recaptchaloading = RxBool(false);
   List<RxBool> validationForm =
       List.generate(RegistrationFormOfficeBranchLabel.values.length, (i) {
     switch (i) {
@@ -243,20 +245,60 @@ class RegistrationFormOfficeBranchController extends GetxController {
         (index) => AddressModel.fromJson(getRegency[index]));
   }
 
-  // void validateRecaptcha(String val) {
-  //   if (val == "true") {
-  //     _recaptchaValidation.value = true;
-  //   } else {
-  //     _recaptchaValidation.value = false;
-  //   }
-  // }
+  Obx validationRecaptchaWidget() {
+    return Obx(() {
+      if (_recaptchaValidation.value && !_recaptchaloading.value) {
+        return const Icon(Icons.check, color: BLUE_DARK);
+      } else if (_recaptchaloading.value) {
+        return const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CircularProgressIndicator(),
+        );
+      } else {
+        return Container();
+      }
+    });
+  }
 
-  void Function()? next() {
-    if (validationForm.contains(RxBool(false))) {
+  void validateRecaptcha(String val) {
+    if (val == "Success") {
+      _recaptchaValidation.value = true;
+    } else {
+      _recaptchaValidation.value = false;
+    }
+  }
+
+  void Function()? validationRecaptcha() {
+    if (_recaptchaValidation.value) {
       return null;
     }
     return () async {
-      await Get.toNamed(ROUTE.selfieAndKtpVerification.name);
+      try {
+        _recaptchaloading.value = true;
+        const _methodChannel = MethodChannel('newdoasdk');
+        final _res = await _methodChannel.invokeMethod<String>(
+            'validationRecaptcha', recaptchaSiteKey);
+        if (_res == "Success") {
+          _recaptchaloading.value = false;
+          validateRecaptcha(_res!);
+        } else {
+          _recaptchaloading.value = false;
+          DIALOG_HELPER("$_res");
+        }
+      } catch (e) {
+        _recaptchaloading.value = false;
+        DIALOG_HELPER("$e");
+        return;
+      }
+    };
+  }
+
+  void Function()? next() {
+    if (validationForm.contains(RxBool(false)) || !_recaptchaValidation.value) {
+      return null;
+    }
+    return () async {
+      DIALOG_HELPER("UNDER DEVELOP");
     };
   }
 

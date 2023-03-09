@@ -115,7 +115,9 @@ class OnBoardingBody extends StatelessWidget {
                           textStyleW700(fontSize: 18, fontColor: Colors.white),
                     ),
                   ),
-                  onPressed: () {})
+                  onPressed: () async {
+                    await DIALOG_HELPER("UNDER DEVELOP");
+                  })
             ],
           )
         ],

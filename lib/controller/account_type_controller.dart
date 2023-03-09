@@ -79,12 +79,13 @@ class AccountTypeController extends GetxController
   }
 
   void Function() showFullFeature() {
-    return () {
+    return () async {
       isShowFullFeature.value = !isShowFullFeature.value;
       if (isShowFullFeature.value) {
         showFullFeatureArrowAngle.value = 5.0;
         showFullFeatureBtnTitle.value = AccountTypeWord.sembunyikan.text;
         expandController.forward();
+        await Future.delayed(const Duration(milliseconds: 500));
         scrollToDown();
       } else {
         showFullFeatureBtnTitle.value = AccountTypeWord.selengkapnya.text;

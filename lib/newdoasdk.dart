@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:newdoasdk/api/api.dart';
+import 'package:newdoasdk/const_path.dart';
+import 'package:newdoasdk/controller/main_controller.dart';
+import 'package:newdoasdk/newdoasdk_platform_interface.dart';
 import 'package:newdoasdk/pages/unknown_route.dart';
 import 'package:newdoasdk/routes.dart';
-import 'newdoasdk_platform_interface.dart';
 
-class NewDoasdk {
+class NewDoaSdk {
   Future<String?> getPlatformVersion() {
-    return NewdoasdkPlatform.instance.getPlatformVersion();
+    return NewDoaSdkPlatform.instance.getPlatformVersion();
   }
 
   void setZolozBaseUrl(String url) {
@@ -18,6 +19,11 @@ class NewDoasdk {
     } else {
       zolozBaseUrl = "https://$url/api";
     }
+  }
+
+  void setRecaptchaSiteKey(String? siteKey) {
+    assert(siteKey != null);
+    recaptchaSiteKey = siteKey!;
   }
 
   Future<void> runSdk(BuildContext? context) async {
@@ -31,6 +37,9 @@ class NewDoasdk {
           return WillPopScope(
               onWillPop: _showExitPopup(context),
               child: GetMaterialApp(
+                  onInit: () {
+                    Get.put(MainController());
+                  },
                   defaultTransition: Transition.size,
                   transitionDuration: const Duration(milliseconds: 500),
                   debugShowCheckedModeBanner: false,

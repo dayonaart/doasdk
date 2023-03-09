@@ -6,23 +6,22 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockNewdoasdkPlatform
     with MockPlatformInterfaceMixin
-    implements NewdoasdkPlatform {
+    implements NewDoaSdkPlatform {
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 }
 
 void main() {
-  final NewdoasdkPlatform initialPlatform = NewdoasdkPlatform.instance;
+  final NewDoaSdkPlatform initialPlatform = NewDoaSdkPlatform.instance;
 
-  test('$MethodChannelNewdoasdk is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelNewdoasdk>());
+  test('$MethodChannelNewDoaSdk is the default instance', () {
+    expect(initialPlatform, isInstanceOf<MethodChannelNewDoaSdk>());
   });
+  NewDoaSdk newDoasdkPlugin = NewDoaSdk();
+  MockNewdoasdkPlatform fakePlatform = MockNewdoasdkPlatform();
+  NewDoaSdkPlatform.instance = fakePlatform;
 
   test('getPlatformVersion', () async {
-    NewDoasdk newDoasdkPlugin = NewDoasdk();
-    MockNewdoasdkPlatform fakePlatform = MockNewdoasdkPlatform();
-    NewdoasdkPlatform.instance = fakePlatform;
-
     expect(await newDoasdkPlugin.getPlatformVersion(), '42');
   });
 }

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:newdoasdk/newdoasdk_method_channel.dart';
 
 void main() {
-  MethodChannelNewdoasdk platform = MethodChannelNewdoasdk();
+  MethodChannelNewDoaSdk platform = MethodChannelNewDoaSdk();
   const MethodChannel channel = MethodChannel('newdoasdk');
 
   TestWidgetsFlutterBinding.ensureInitialized();

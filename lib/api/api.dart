@@ -1,9 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:dio/dio.dart';
+import 'package:newdoasdk/const_path.dart';
 import 'package:newdoasdk/widget/widgets.dart';
-
-String zolozBaseUrl = "";
 
 class Api {
   final BaseOptions _baseOptions = BaseOptions(

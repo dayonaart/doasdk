@@ -1,26 +1,24 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:newdoasdk/api/api.dart';
 import 'package:newdoasdk/controller/main_controller.dart';
 import 'package:newdoasdk/model/zoloz_model.dart';
 import 'package:newdoasdk/widget/widgets.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 import 'package:zolozkit_for_flutter/zolozkit_for_flutter.dart';
 
 class FaceAndSelfieVericationController extends GetxController {
   final MainController _mController = Get.find();
 
-  Future<String> copyUIConfigFile() async {
-    var file = await rootBundle.load("assets/UIConfig.zip");
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    String configFilePath = "${appDocDir.path}/UIConfig.zip";
-    final buffer = file.buffer;
-    await File(configFilePath).writeAsBytes(
-        buffer.asUint8List(file.offsetInBytes, file.lengthInBytes));
-    return configFilePath;
-  }
+  // Future<String> copyUIConfigFile() async {
+  //   var file = await rootBundle.load("assets/UIConfig.zip");
+  //   Directory appDocDir = await getApplicationDocumentsDirectory();
+  //   String configFilePath = "${appDocDir.path}/UIConfig.zip";
+  //   final buffer = file.buffer;
+  //   await File(configFilePath).writeAsBytes(
+  //       buffer.asUint8List(file.offsetInBytes, file.lengthInBytes));
+  //   return configFilePath;
+  // }
 
   Future<InitializePayload> _initializePayload() async {
     var metaInfo = await ZolozkitForFlutter.metaInfo;
