@@ -252,7 +252,7 @@ class RegistrationFormOfficeBranchController extends GetxController {
   }
 
   void Function()? next() {
-    if (validationForm.contains(RxBool(false)) || !_recaptchaValidation.value) {
+    if (validationForm.contains(RxBool(false))) {
       return null;
     }
     return () async {
