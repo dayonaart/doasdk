@@ -24,7 +24,7 @@ class RegistrationFormOfficeBranchController extends GetxController {
   RxList<AddressModel?> provinceList = RxList();
   RxList<AddressModel?> subDistrictList = RxList();
   RxList<AddressModel?> officeBrachList = RxList();
-  RxBool _recaptchaValidation = RxBool(false);
+  // RxBool _recaptchaValidation = RxBool(false);
   List<RxBool> validationForm =
       List.generate(RegistrationFormOfficeBranchLabel.values.length, (i) {
     switch (i) {
@@ -243,13 +243,13 @@ class RegistrationFormOfficeBranchController extends GetxController {
         (index) => AddressModel.fromJson(getRegency[index]));
   }
 
-  void validateRecaptcha(String val) {
-    if (val == "true") {
-      _recaptchaValidation.value = true;
-    } else {
-      _recaptchaValidation.value = false;
-    }
-  }
+  // void validateRecaptcha(String val) {
+  //   if (val == "true") {
+  //     _recaptchaValidation.value = true;
+  //   } else {
+  //     _recaptchaValidation.value = false;
+  //   }
+  // }
 
   void Function()? next() {
     if (validationForm.contains(RxBool(false))) {

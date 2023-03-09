@@ -77,7 +77,7 @@ class RecaptchaForm extends StatelessWidget {
                 JavascriptChannel(
                     name: 'Captcha',
                     onMessageReceived: (JavascriptMessage message) {
-                      _controller.validateRecaptcha(message.message);
+                      // _controller.validateRecaptcha(message.message);
                     })
               },
               // initialUrl: 'packages/newdoasdk/assets/index.html',
