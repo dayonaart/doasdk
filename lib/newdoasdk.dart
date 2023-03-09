@@ -35,7 +35,7 @@ class NewDoasdk {
                   transitionDuration: const Duration(milliseconds: 500),
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData(fontFamily: 'montserrat'),
-                  initialRoute: ROUTE.registrationFormOfficeBranch.name,
+                  initialRoute: ROUTE.onBoarding.name,
                   getPages: routePage,
                   unknownRoute: GetPage(
                     name: '/notfound',
