@@ -26,7 +26,7 @@ class RegistrationFormOfficeBranchController extends GetxController {
   RxList<AddressModel?> subDistrictList = RxList();
   RxList<AddressModel?> officeBrachList = RxList();
   final RxBool _recaptchaValidation = RxBool(false);
-  final RxBool _recaptchaloading = RxBool(false);
+  final RxBool _recaptchaLoading = RxBool(false);
   List<RxBool> validationForm =
       List.generate(RegistrationFormOfficeBranchLabel.values.length, (i) {
     switch (i) {
@@ -245,19 +245,25 @@ class RegistrationFormOfficeBranchController extends GetxController {
         (index) => AddressModel.fromJson(getRegency[index]));
   }
 
-  Obx validationRecaptchaWidget() {
-    return Obx(() {
-      if (_recaptchaValidation.value && !_recaptchaloading.value) {
-        return const Icon(Icons.check, color: BLUE_DARK);
-      } else if (_recaptchaloading.value) {
-        return const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: CircularProgressIndicator(),
-        );
-      } else {
-        return Container();
-      }
-    });
+  Widget validationRecaptchaWidget() {
+    if (_recaptchaValidation.value && !_recaptchaLoading.value) {
+      return Container(
+          height: 30,
+          width: 30,
+          decoration: BoxDecoration(
+              border: Border.all(width: 1, color: BLUE_TEXT),
+              borderRadius: BorderRadius.circular(4)),
+          child: const Icon(Icons.check, color: ORANGE));
+    } else if (_recaptchaLoading.value) {
+      return const CircularProgressIndicator();
+    } else {
+      return Container(
+        height: 30,
+        width: 30,
+        decoration:
+            BoxDecoration(border: Border.all(width: 1, color: BLUE_TEXT)),
+      );
+    }
   }
 
   void validateRecaptcha(String val) {
@@ -274,19 +280,19 @@ class RegistrationFormOfficeBranchController extends GetxController {
     }
     return () async {
       try {
-        _recaptchaloading.value = true;
+        _recaptchaLoading.value = true;
         const _methodChannel = MethodChannel('newdoasdk');
         final _res = await _methodChannel.invokeMethod<String>(
             'validationRecaptcha', recaptchaSiteKey);
         if (_res == "Success") {
-          _recaptchaloading.value = false;
+          _recaptchaLoading.value = false;
           validateRecaptcha(_res!);
         } else {
-          _recaptchaloading.value = false;
+          _recaptchaLoading.value = false;
           DIALOG_HELPER("$_res");
         }
       } catch (e) {
-        _recaptchaloading.value = false;
+        _recaptchaLoading.value = false;
         DIALOG_HELPER("$e");
         return;
       }
@@ -298,7 +304,7 @@ class RegistrationFormOfficeBranchController extends GetxController {
       return null;
     }
     return () async {
-      DIALOG_HELPER("UNDER DEVELOP");
+      await Get.toNamed(ROUTE.faceAndSelfieVerification.name);
     };
   }
 

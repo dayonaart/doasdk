@@ -80,13 +80,7 @@ class RecaptchaForm extends StatelessWidget {
                     Obx(() {
                       return GestureDetector(
                         onTap: _controller.validationRecaptcha(),
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              border: Border.all(width: 2, color: BLUE_DARK)),
-                          child: _controller.validationRecaptchaWidget(),
-                        ),
+                        child: _controller.validationRecaptchaWidget(),
                       );
                     }),
                     const SizedBox(width: 20),

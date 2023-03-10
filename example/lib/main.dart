@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newdoasdk/newdoasdk.dart';
+import 'package:newdoasdk/routes.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -17,10 +18,11 @@ class MyApp extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () async {
-              newDoaSdk.setZolozBaseUrl("192.168.0.107:8080");
+              newDoaSdk.setZolozBaseUrl("192.168.158.204:9000");
               newDoaSdk.setRecaptchaSiteKey(
                   "6LcS0egkAAAAAMY8KtKzgWr7dT8axb-hK9o4RFSK");
-              newDoaSdk.runSdk(context);
+              newDoaSdk.runSdk(context,
+                  route: ROUTE.faceAndSelfieVerification.name);
             },
             child: const Text("data")),
       ),

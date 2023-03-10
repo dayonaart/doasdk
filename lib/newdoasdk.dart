@@ -4,15 +4,12 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:newdoasdk/const_path.dart';
 import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/newdoasdk_platform_interface.dart';
 import 'package:newdoasdk/pages/unknown_route.dart';
 import 'package:newdoasdk/routes.dart';
 
 class NewDoaSdk {
-  Future<String?> getPlatformVersion() {
-    return NewDoaSdkPlatform.instance.getPlatformVersion();
-  }
-
+  /// Untuk dapat terhubung dengan ZOLOZ SDK dengan koneksi local berikan param dengan format ip:port
+  /// contoh 192.168.100.100:8080
   void setZolozBaseUrl(String url) {
     if (url.contains("192")) {
       zolozBaseUrl = "http://$url/api/";
@@ -21,12 +18,17 @@ class NewDoaSdk {
     }
   }
 
+  /// site key dari google enterprise https://cloud.google.com/recaptcha-enterprise,
+  /// untuk mendapatkan site key kalian perlu signup atau generate jika sudah teregristrasi
   void setRecaptchaSiteKey(String? siteKey) {
     assert(siteKey != null);
     recaptchaSiteKey = siteKey!;
   }
 
-  Future<void> runSdk(BuildContext? context) async {
+  Future<void> runSdk(
+    BuildContext? context, {
+    String? route,
+  }) async {
     await initializeDateFormatting().then((value) {
       Intl.defaultLocale = "in";
     });
@@ -44,7 +46,7 @@ class NewDoaSdk {
                   transitionDuration: const Duration(milliseconds: 500),
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData(fontFamily: 'montserrat'),
-                  initialRoute: ROUTE.onBoarding.name,
+                  initialRoute: route ?? ROUTE.onBoarding.name,
                   getPages: routePage,
                   unknownRoute: GetPage(
                     name: '/notfound',
