@@ -35,7 +35,7 @@ class FaceAndAndSelfieVerication extends StatelessWidget {
                         style: textStyleW600(fontColor: Colors.white),
                       ),
                     ),
-                    onPressed: _controller.startZoloz(),
+                    onPressed: _controller.next(),
                     radiusCircular: 999))));
   }
 }

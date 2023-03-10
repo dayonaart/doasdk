@@ -20,7 +20,6 @@ class TakeCameraKtpController extends GetxController
   double boxHeight = 248;
   double boxWidth = 365;
   double previewAspectRatio = 0.5;
-
   List<TextSpan> get cameraHelperDescriptionWidget {
     return TakeCameraKtpWord.pastikanPosisi.text.split("").map((e) {
       if (RegExp(r'[&]', caseSensitive: true).hasMatch(e)) {
@@ -36,8 +35,13 @@ class TakeCameraKtpController extends GetxController
 
   Future<void> _initCameraController(CameraDescription description) async {
     camController = CameraController(description, ResolutionPreset.high);
-    await camController?.initialize().then((_) {
+
+    await camController?.initialize().then((_) async {
       isCameraReady = (camController != null);
+      if (isCameraReady) {
+        var _maxZoom = await camController!.getMaxZoomLevel();
+        camController!.setFlashMode(FlashMode.off);
+      }
       update();
     }).catchError((Object e) {
       if (e is CameraException) {
@@ -132,7 +136,7 @@ class TakeCameraKtpController extends GetxController
 
     final CameraController cameraController = CameraController(
       cameraDescription,
-      ResolutionPreset.max,
+      ResolutionPreset.low,
       enableAudio: true,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
@@ -189,7 +193,6 @@ class TakeCameraKtpController extends GetxController
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    camController?.dispose();
     super.dispose();
   }
 

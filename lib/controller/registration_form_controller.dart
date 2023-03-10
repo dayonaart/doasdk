@@ -8,7 +8,6 @@ import 'package:newdoasdk/enum.dart';
 import 'package:newdoasdk/routes.dart';
 import 'package:newdoasdk/style/colors.dart';
 import 'package:newdoasdk/style/textstyle.dart';
-import 'package:screenshot/screenshot.dart';
 
 class RegistrationFormController extends GetxController {
   final MainController _mController = Get.find();
@@ -27,7 +26,6 @@ class RegistrationFormController extends GetxController {
     }
   }
 
-  final ScreenshotController _screenshotController = ScreenshotController();
   late TextEditingController nikTextController,
       fullNameTextController,
       dobTextController,
@@ -39,18 +37,13 @@ class RegistrationFormController extends GetxController {
     };
   }
 
-  Future<void> _cropKtpImage() async {
-    var _crop = await _screenshotController.captureFromWidget(SizedBox(
-      width: Get.width / 2,
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Image.file(File(ktpPath), fit: BoxFit.cover),
-        // child: Image.asset(_myKtpPath, fit: BoxFit.cover),
-      ),
-    ));
+  Future<void> cropKtpImage() async {
+    // var _crop = await _screenshotController
+    //     .captureFromWidget(Image.file(File(ktpPath), fit: BoxFit.cover));
     ktpWidget.value = ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
-        child: Image.memory(_crop, height: 128, width: 191, fit: BoxFit.cover));
+        child: Image.file(File(ktpPath),
+            height: 128, width: 191, fit: BoxFit.cover));
   }
 
   void Function() datePicker() {
@@ -276,7 +269,7 @@ class RegistrationFormController extends GetxController {
   @override
   void onReady() async {
     _mController.startProgressAnim();
-    await _cropKtpImage();
+    await cropKtpImage();
     super.onReady();
   }
 

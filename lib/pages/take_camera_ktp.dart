@@ -36,7 +36,24 @@ class TakeCameraPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       if (_controller.isCameraReady) {
-        return TakeCameraTool();
+        return Column(
+          children: [
+            Expanded(
+                child: CameraPreview(
+              _controller.camController!,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Stack(
+                  children: [
+                    HeaderTakeKtp(),
+                    CameraTools(),
+                    KtpPreviewWidget(),
+                  ],
+                ),
+              ),
+            )),
+          ],
+        );
       } else {
         return Container();
       }
@@ -44,20 +61,107 @@ class TakeCameraPreview extends StatelessWidget {
   }
 }
 
-class TakeCameraTool extends StatelessWidget {
-  final TakeCameraKtpController _ = Get.find();
+class KtpPreviewWidget extends StatelessWidget {
+  final TakeCameraKtpController _controller = Get.find();
 
-  TakeCameraTool({super.key});
+  KtpPreviewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+    return Align(
+      alignment: Alignment.center,
+      child: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
         children: [
-          const SizedBox(height: 24),
-          Card(
+          DashedRect(
+            color: Colors.white,
+            height: _controller.boxHeight,
+            width: Get.width,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Expanded(
+                    flex: 2,
+                    child: DashedRect(height: 30, color: Colors.white)),
+                const SizedBox(width: 17),
+                DashedRect(
+                    width: _controller.boxWidth / 3,
+                    height: _controller.boxHeight / 1.5,
+                    color: Colors.white),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CameraTools extends StatelessWidget {
+  final TakeCameraKtpController _controller = Get.find();
+
+  CameraTools({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 71),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const SizedBox(width: 10),
+            SizedBox(
+              height: 72,
+              width: 72,
+              child: GestureDetector(
+                onTap: _controller.takePicture(),
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Image.asset(
+                    takeCameraButtonAssets,
+                    color: ORANGE,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 33.33,
+              width: 33.33,
+              child: GestureDetector(
+                onTap: _controller.changeCameraDirection(),
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Image.asset(
+                    flipCameraButtonAssets,
+                    color: ORANGE,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HeaderTakeKtp extends StatelessWidget {
+  final TakeCameraKtpController _controller = Get.find();
+
+  HeaderTakeKtp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 24),
+          child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             color: BLUE_LIGHT,
@@ -70,132 +174,15 @@ class TakeCameraTool extends StatelessWidget {
                   ImageIcon(AssetImage(iAssets), color: BLUE_TEXT),
                   const SizedBox(width: 9.67),
                   Expanded(
-                      child: Text.rich(
-                          TextSpan(children: _.cameraHelperDescriptionWidget))),
+                      child: Text.rich(TextSpan(
+                          children:
+                              _controller.cameraHelperDescriptionWidget))),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 96),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CameraKtpPreview(),
-            ],
-          )),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 43),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(width: 10),
-                SizedBox(
-                  height: 72,
-                  width: 72,
-                  child: GestureDetector(
-                    onTap: _.takePicture(),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      child: Image.asset(
-                        takeCameraButtonAssets,
-                        color: ORANGE,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 33.33,
-                  width: 33.33,
-                  child: GestureDetector(
-                    onTap: _.changeCameraDirection(),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      child: Image.asset(
-                        flipCameraButtonAssets,
-                        color: ORANGE,
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(height: 63),
-        ],
-      ),
-    );
-  }
-}
-
-class CameraKtpPreview extends StatelessWidget {
-  final TakeCameraKtpController _controller = Get.find();
-
-  CameraKtpPreview({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: _controller.boxHeight,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        clipBehavior: Clip.none,
-        fit: StackFit.expand,
-        children: <Widget>[
-          Center(
-            child: SizedBox(
-              height: _controller.boxHeight,
-              key: _controller.cameraPrev,
-              child: AspectRatio(
-                aspectRatio: 1 / _controller.previewAspectRatio,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                  child: Transform.scale(
-                    scale: _controller.camController!.value.aspectRatio /
-                        _controller.previewAspectRatio,
-                    child: Center(
-                      child: CameraPreview(
-                        _controller.camController!,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Stack(
-                children: [
-                  SizedBox(
-                      height: _controller.boxHeight,
-                      width: _controller.boxWidth,
-                      child: const DashedRect(color: Colors.white)),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 40),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Expanded(
-                            flex: 2,
-                            child: SizedBox(
-                                height: 30,
-                                child: DashedRect(color: Colors.white))),
-                        const SizedBox(width: 17),
-                        Expanded(
-                          child: SizedBox(
-                              height: _controller.boxHeight / 1.5,
-                              child: const DashedRect(color: Colors.white)),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

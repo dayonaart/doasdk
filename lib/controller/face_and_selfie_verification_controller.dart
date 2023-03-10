@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:newdoasdk/api/api.dart';
 import 'package:newdoasdk/controller/main_controller.dart';
 import 'package:newdoasdk/model/zoloz_model.dart';
+import 'package:newdoasdk/routes.dart';
 import 'package:newdoasdk/widget/widgets.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'package:zolozkit_for_flutter/zolozkit_for_flutter.dart';
@@ -49,11 +50,15 @@ class FaceAndSelfieVericationController extends GetxController {
           },
           //onInterrupt
           (retCode, extInfo) async {
+            DIALOG_HELPER("onInterrupt $retCode");
+            return;
             await _checkResult(_initPayload.bizId!,
                 _initResponse.transactionId!, _initPayload.metaInfo!);
           },
           //onComplete
           (retCode, extInfo) async {
+            DIALOG_HELPER("onComplete $retCode");
+            return;
             await _checkResult(_initPayload.bizId!,
                 _initResponse.transactionId!, _initPayload.metaInfo!);
           },
@@ -78,6 +83,12 @@ class FaceAndSelfieVericationController extends GetxController {
       //   _checkResultResModel = CheckResultResModel.fromJson(_res);
       // });
     }
+  }
+
+  void Function()? next() {
+    return () async {
+      await Get.toNamed(ROUTE.selfieAndKtpVerification.name);
+    };
   }
 
   @override

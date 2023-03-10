@@ -14,7 +14,9 @@ class RegistrationForm extends StatelessWidget {
     return SAFE_AREA(
         child: SCAFFOLD(
             appBar: APPBAR(
-                onPressed: () => Get.back(),
+                onPressed: () {
+                  Get.back();
+                },
                 title: "Registrasi",
                 progressData: 3),
             body: SingleChildScrollView(

@@ -11,6 +11,7 @@ import 'package:newdoasdk/pages/registration_form.dart';
 import 'package:newdoasdk/pages/registration_form_job_detail.dart';
 import 'package:newdoasdk/pages/registration_form_office_branch.dart';
 import 'package:newdoasdk/pages/registration_form_private.dart';
+import 'package:newdoasdk/pages/selfie_and_ktp_verification.dart';
 import 'package:newdoasdk/pages/take_camera_ktp.dart';
 
 enum ROUTE {
@@ -59,6 +60,8 @@ extension Page on ROUTE {
         return '/registrationFormOfficeBranch';
       case ROUTE.faceAndSelfieVerification:
         return '/faceAndSelfieVerification';
+      case ROUTE.selfieAndKtpVerification:
+        return '/selfieAndKtpVerification';
       default:
         return "";
     }
@@ -89,5 +92,8 @@ List<GetPage> get routePage {
     GetPage(
         name: ROUTE.faceAndSelfieVerification.name,
         page: () => FaceAndAndSelfieVerication()),
+    GetPage(
+        name: ROUTE.selfieAndKtpVerification.name,
+        page: () => SelfieAndKtpVerification()),
   ];
 }
