@@ -9,6 +9,7 @@ import 'package:newdoasdk/routes.dart';
 
 class NewDoaSdk {
   /// Untuk dapat terhubung dengan ZOLOZ SDK dengan koneksi local berikan param dengan format ip:port
+  ///
   /// contoh 192.168.100.100:8080
   void setZolozBaseUrl(String url) {
     if (url.contains("192")) {
@@ -19,6 +20,7 @@ class NewDoaSdk {
   }
 
   /// site key dari google enterprise https://cloud.google.com/recaptcha-enterprise,
+  ///
   /// untuk mendapatkan site key kalian perlu signup atau generate jika sudah teregristrasi
   void setRecaptchaSiteKey(String? siteKey) {
     assert(siteKey != null);
@@ -67,7 +69,11 @@ class NewDoaSdk {
                   child: const Text('Tidak'),
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(true),
+                  onPressed: () {
+                    final MainController _mController = Get.find();
+                    _mController.camController?.dispose();
+                    Navigator.of(context).pop(true);
+                  },
                   child: const Text('Ya'),
                 ),
               ],

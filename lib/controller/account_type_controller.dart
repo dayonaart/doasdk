@@ -85,7 +85,6 @@ class AccountTypeController extends GetxController
         showFullFeatureArrowAngle.value = 5.0;
         showFullFeatureBtnTitle.value = AccountTypeWord.sembunyikan.text;
         expandController.forward();
-        await Future.delayed(const Duration(milliseconds: 500));
         scrollToDown();
       } else {
         showFullFeatureBtnTitle.value = AccountTypeWord.selengkapnya.text;
@@ -106,12 +105,13 @@ class AccountTypeController extends GetxController
 
   void Function()? next() {
     return () async {
-      await Get.toNamed(ROUTE.ktpRegistration.name);
+      await Get.toNamed(ROUTE.preTakeKtp.name);
     };
   }
 
-  void scrollToDown() {
-    scController.animateTo(
+  Future<void> scrollToDown() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    await scController.animateTo(
       Get.height,
       duration: const Duration(seconds: 2),
       curve: Curves.fastOutSlowIn,

@@ -11,6 +11,13 @@ String openingAccountAssets = "packages/newdoasdk/assets/opening_account.png";
 String iAssets = "packages/newdoasdk/assets/i.png";
 String penAssets = "packages/newdoasdk/assets/pen.png";
 String recaptchaAssets = "packages/newdoasdk/assets/recaptcha.png";
+String phoneHandAssets = "packages/newdoasdk/assets/phone_hand.png";
+String whatsappAssets = "packages/newdoasdk/assets/whatsapp.png";
+String smsAssets = "packages/newdoasdk/assets/sms.png";
+String signatureAssets = "packages/newdoasdk/assets/signature_icon.png";
+String npwpAssets = "packages/newdoasdk/assets/npwp_icon.png";
+String cameraBackgroundAssets =
+    "packages/newdoasdk/assets/camera_background.png";
 String takeFaceAndSelfieAssets =
     "packages/newdoasdk/assets/take_face_and_selfie.png";
 String zolozBaseUrl = "";

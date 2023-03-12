@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
               newDoaSdk.setZolozBaseUrl("192.168.158.204:9000");
               newDoaSdk.setRecaptchaSiteKey(
                   "6LcS0egkAAAAAMY8KtKzgWr7dT8axb-hK9o4RFSK");
-              newDoaSdk.runSdk(context, route: ROUTE.takeCameraKtp.name);
+              newDoaSdk.runSdk(context, route: ROUTE.onBoarding.name);
             },
             child: const Text("data")),
       ),

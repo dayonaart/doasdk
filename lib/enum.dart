@@ -223,7 +223,7 @@ extension InputPhoneNumberText on InputPhoneNumberWord {
   }
 }
 
-enum KtpRegistrationWord {
+enum PreTakeKtpWord {
   registrasi,
   lanjut,
   verifikasieKTP,
@@ -232,20 +232,20 @@ enum KtpRegistrationWord {
   sesuaiDenganIdentitasAnda
 }
 
-extension KtpRegistrationText on KtpRegistrationWord {
+extension KtpRegistrationText on PreTakeKtpWord {
   String get text {
     switch (this) {
-      case KtpRegistrationWord.registrasi:
+      case PreTakeKtpWord.registrasi:
         return "Registrasi";
-      case KtpRegistrationWord.lanjut:
+      case PreTakeKtpWord.lanjut:
         return "Lanjut";
-      case KtpRegistrationWord.verifikasieKTP:
+      case PreTakeKtpWord.verifikasieKTP:
         return "Verifikasi e-KTP";
-      case KtpRegistrationWord.prosesIniBertujuan:
+      case PreTakeKtpWord.prosesIniBertujuan:
         return "Proses ini bertujuan untuk mempermudah\nmelakukan pengisian dan validasi data Anda.";
-      case KtpRegistrationWord.pastikanHasilFoto:
+      case PreTakeKtpWord.pastikanHasilFoto:
         return "Pastikan hasil foto memenuhi ketentuan dibawah:";
-      case KtpRegistrationWord.sesuaiDenganIdentitasAnda:
+      case PreTakeKtpWord.sesuaiDenganIdentitasAnda:
         return "• * sesuai dengan identitas Anda\n• * tidak silau & tidak buram\n• * terbaca jelas dan tidak terpotong\n• Tidak ada objek lain selain KTP dalam foto";
       default:
         return "";
@@ -283,7 +283,7 @@ extension OpeningAccountText on OpeningAccountWord {
   }
 }
 
-enum TakeCameraKtpWord {
+enum TakeKtpWord {
   registrasi,
   pastikanPosisi,
   ktpAsli,
@@ -293,22 +293,22 @@ enum TakeCameraKtpWord {
   fotoUlang
 }
 
-extension TakeCameraKtpText on TakeCameraKtpWord {
+extension TakeCameraKtpText on TakeKtpWord {
   String get text {
     switch (this) {
-      case TakeCameraKtpWord.registrasi:
+      case TakeKtpWord.registrasi:
         return "Registrasi";
-      case TakeCameraKtpWord.pastikanPosisi:
+      case TakeKtpWord.pastikanPosisi:
         return "Pastikan posisi & dan klik ambil foto. Pastikan foto terlihat dengan jelas.";
-      case TakeCameraKtpWord.ktpAsli:
+      case TakeKtpWord.ktpAsli:
         return "KTP asli pada area yang tersedia";
-      case TakeCameraKtpWord.pastikanFoto:
+      case TakeKtpWord.pastikanFoto:
         return "Pastikan foto yang anda ambil ";
-      case TakeCameraKtpWord.sudahSesuai:
+      case TakeKtpWord.sudahSesuai:
         return "sudah sesuai dan sudah fokus (tidak blur).";
-      case TakeCameraKtpWord.fotoSudahSesuai:
+      case TakeKtpWord.fotoSudahSesuai:
         return "Foto sudah sesuai";
-      case TakeCameraKtpWord.fotoUlang:
+      case TakeKtpWord.fotoUlang:
         return "Foto Ulang";
       default:
         return "";
@@ -564,6 +564,42 @@ extension FormOfficeBranchTitle on RegistrationFormOfficeBranchLabel {
         return "Kantor Cabang";
       case RegistrationFormOfficeBranchLabel.alamatKantorCabang:
         return "Alamat Kantor Cabang";
+      default:
+        return "";
+    }
+  }
+}
+
+enum TakeSelfieAndKtpWord {
+  fotoSelfieDenganKtp,
+  pastikan,
+  wajahDanKtp,
+  danAmbilFoto,
+  pastikanFoto,
+  sudahSesuai,
+  fotoSudahSesuai,
+  fotoUlang
+}
+
+extension TakeCameraSelfieAndKtpText on TakeSelfieAndKtpWord {
+  String get text {
+    switch (this) {
+      case TakeSelfieAndKtpWord.fotoSelfieDenganKtp:
+        return "Foto Selfie dengan KTP";
+      case TakeSelfieAndKtpWord.pastikan:
+        return "Pastikan ";
+      case TakeSelfieAndKtpWord.wajahDanKtp:
+        return "wajah dan KTP asli Anda memenuhi area";
+      case TakeSelfieAndKtpWord.danAmbilFoto:
+        return "dan ambil foto ketika Anda siap.";
+      case TakeSelfieAndKtpWord.pastikanFoto:
+        return "Pastikan foto yang anda ambil ";
+      case TakeSelfieAndKtpWord.sudahSesuai:
+        return "sudah sesuai dan sudah fokus (tidak blur).";
+      case TakeSelfieAndKtpWord.fotoSudahSesuai:
+        return "Foto sudah sesuai";
+      case TakeSelfieAndKtpWord.fotoUlang:
+        return "Foto Ulang";
       default:
         return "";
     }

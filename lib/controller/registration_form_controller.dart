@@ -11,7 +11,6 @@ import 'package:newdoasdk/style/textstyle.dart';
 
 class RegistrationFormController extends GetxController {
   final MainController _mController = Get.find();
-  String get ktpPath => _mController.ktpFilePath.value;
   String get _myKtpPath => "assets/my_ktp.JPG";
   RxBool enableEditing = RxBool(false);
   Rx<Widget> ktpWidget = Rx(Container());
@@ -42,7 +41,7 @@ class RegistrationFormController extends GetxController {
     //     .captureFromWidget(Image.file(File(ktpPath), fit: BoxFit.cover));
     ktpWidget.value = ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
-        child: Image.file(File(ktpPath),
+        child: Image.file(File(_mController.getImagePath("Registrasi").value),
             height: 128, width: 191, fit: BoxFit.cover));
   }
 

@@ -304,7 +304,7 @@ class RegistrationFormOfficeBranchController extends GetxController {
       return null;
     }
     return () async {
-      await Get.toNamed(ROUTE.faceAndSelfieVerification.name);
+      await Get.toNamed(ROUTE.livenessVerification.name);
     };
   }
 

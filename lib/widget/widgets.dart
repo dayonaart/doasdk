@@ -53,12 +53,14 @@ AppBar APPBAR({
       title!,
       style: textStyleW500(fontSize: 16, fontColor: Colors.black),
     ),
-    leading: IconButton(
-        onPressed: onPressed,
-        icon: Icon(
-          icon ?? Icons.arrow_back_ios,
-          color: Colors.black,
-        )),
+    leading: onPressed != null
+        ? IconButton(
+            onPressed: onPressed,
+            icon: Icon(
+              icon ?? Icons.arrow_back_ios,
+              color: Colors.black,
+            ))
+        : null,
     backgroundColor: Colors.white,
   );
 }
@@ -66,18 +68,18 @@ AppBar APPBAR({
 ElevatedButton OUTLINE_BUTTON(
     {@required Widget? child,
     @required void Function()? onPressed,
-    Color sideColor = BLUE_DARK,
     double? radiusCircular,
     MainAxisSize? mainAxisSize}) {
   assert(child != null);
   return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
+          elevation: MaterialStateProperty.all(0),
           shadowColor: MaterialStateProperty.all<Color>(Colors.white),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(radiusCircular ?? 6),
-                  side: BorderSide(width: 0.5, color: sideColor))),
+                  side: const BorderSide(width: 0.5, color: ORANGE))),
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white)),
       child: Row(
         mainAxisSize: mainAxisSize ?? MainAxisSize.max,
@@ -123,7 +125,7 @@ PreferredSize PROGRESS_BAR_DATA(int progressData) {
             children: [
               Container(width: Get.width, color: GREY_BACKGROUND, height: 5),
               SizedBox(
-                  width: Get.width / 12 * progressData,
+                  width: Get.width / 14 * progressData,
                   height: 5,
                   child: Obx(() => LinearProgressIndicator(
                         color: ORANGE,

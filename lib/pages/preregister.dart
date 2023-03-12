@@ -45,7 +45,6 @@ class PreRegister extends StatelessWidget {
                   child: OUTLINE_BUTTON(
                       onPressed: () async =>
                           await Get.toNamed(ROUTE.openingAccount.name),
-                      sideColor: ORANGE,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: Text(

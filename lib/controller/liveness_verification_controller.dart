@@ -8,7 +8,7 @@ import 'package:newdoasdk/widget/widgets.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'package:zolozkit_for_flutter/zolozkit_for_flutter.dart';
 
-class FaceAndSelfieVericationController extends GetxController {
+class LivenessVerificationController extends GetxController {
   final MainController _mController = Get.find();
 
   // Future<String> copyUIConfigFile() async {
@@ -87,7 +87,12 @@ class FaceAndSelfieVericationController extends GetxController {
 
   void Function()? next() {
     return () async {
-      await Get.toNamed(ROUTE.selfieAndKtpVerification.name);
+      try {
+        await _mController.initCameraController(_mController.cameras[1]);
+        await Get.toNamed(ROUTE.selfieAndKtp.name);
+      } catch (e) {
+        await Get.toNamed(ROUTE.selfieAndKtp.name);
+      }
     };
   }
 

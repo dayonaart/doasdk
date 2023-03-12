@@ -10,3 +10,4 @@ const GREY = Color(0xFF949397);
 // const PINK_LIGHT = Color(0xFFE4B4AB);
 const PINK_LIGHT = Color(0xFFFFF0EB);
 const GREY_BACKGROUND = Color(0xFFEFF2F7);
+const GREY_CAMERA = Color(0xFF201F1F);

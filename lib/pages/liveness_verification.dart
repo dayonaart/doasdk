@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/face_and_selfie_verification_controller.dart';
+import 'package:newdoasdk/controller/liveness_verification_controller.dart';
 import 'package:newdoasdk/style/colors.dart';
 import 'package:newdoasdk/style/textstyle.dart';
 import 'package:newdoasdk/widget/widgets.dart';
 
-class FaceAndAndSelfieVerication extends StatelessWidget {
-  FaceAndAndSelfieVerication({super.key});
-  final _controller = Get.put(FaceAndSelfieVericationController());
+class LivenessVerification extends StatelessWidget {
+  LivenessVerification({super.key});
+  final _controller = Get.put(LivenessVerificationController());
   @override
   Widget build(BuildContext context) {
     return SAFE_AREA(
@@ -20,7 +20,7 @@ class FaceAndAndSelfieVerication extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: const [
-                  FaceAndSelfieVerificationHeader(),
+                  LiveneessVerificationHeader(),
                 ],
               ),
             ),
@@ -40,8 +40,8 @@ class FaceAndAndSelfieVerication extends StatelessWidget {
   }
 }
 
-class FaceAndSelfieVerificationHeader extends StatelessWidget {
-  const FaceAndSelfieVerificationHeader({
+class LiveneessVerificationHeader extends StatelessWidget {
+  const LiveneessVerificationHeader({
     super.key,
   });
 

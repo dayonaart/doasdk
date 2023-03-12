@@ -6,12 +6,11 @@ import 'package:newdoasdk/routes.dart';
 import 'package:newdoasdk/style/colors.dart';
 import 'package:newdoasdk/style/textstyle.dart';
 
-class KtpRegistrationController extends GetxController {
+class PreTakeKtpController extends GetxController {
   RxBool isTakePicture = false.obs;
   final MainController _mController = Get.find();
 
-  String requirementDescription =
-      KtpRegistrationWord.sesuaiDenganIdentitasAnda.text;
+  String requirementDescription = PreTakeKtpWord.sesuaiDenganIdentitasAnda.text;
 
   List<TextSpan> get requirementDescriptionWidget {
     return requirementDescription.split("").map((e) {
@@ -27,7 +26,12 @@ class KtpRegistrationController extends GetxController {
 
   void Function() next() {
     return () async {
-      await Get.toNamed(ROUTE.takeCameraKtp.name);
+      try {
+        await _mController.initCameraController(_mController.cameras.first);
+        await Get.toNamed(ROUTE.takeKtp.name);
+      } catch (e) {
+        await Get.toNamed(ROUTE.takeKtp.name);
+      }
     };
   }
 

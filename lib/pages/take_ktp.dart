@@ -1,52 +1,89 @@
-import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newdoasdk/const_path.dart';
 import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/controller/take_camera_ktp_controller.dart';
+import 'package:newdoasdk/controller/take_ktp_controller.dart';
 import 'package:newdoasdk/enum.dart';
 import 'package:newdoasdk/style/colors.dart';
+import 'package:newdoasdk/style/textstyle.dart';
 import 'package:newdoasdk/widget/dashed_rect.dart';
 import 'package:newdoasdk/widget/widgets.dart';
 
-class TakeCameraKtp extends StatelessWidget {
-  TakeCameraKtp({super.key});
+class TakeKtp extends StatelessWidget {
+  TakeKtp({super.key});
   // ignore: unused_field
-  final _controller = Get.put(TakeCameraKtpController());
+  final _controller = Get.put(TakeKtpController());
   @override
   Widget build(BuildContext context) {
     return SAFE_AREA(
         child: SCAFFOLD(
             appBar: APPBAR(
                 onPressed: () => Get.back(),
-                title: TakeCameraKtpWord.registrasi.text,
+                title: TakeKtpWord.registrasi.text,
                 progressData: 3),
-            body: GetBuilder<TakeCameraKtpController>(builder: (_) {
-              return TakeCameraPreview();
+            body: GetBuilder<MainController>(builder: (_) {
+              return TakeKtpPreview();
             })));
   }
 }
 
-class TakeCameraPreview extends StatelessWidget {
-  final TakeCameraKtpController _controller = Get.find();
+class HeaderTakeKtp extends StatelessWidget {
+  final TakeKtpController _controller = Get.find();
 
-  TakeCameraPreview({super.key});
+  HeaderTakeKtp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 24),
+          child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            color: BLUE_LIGHT,
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ImageIcon(AssetImage(iAssets), color: BLUE_TEXT),
+                  const SizedBox(width: 9.67),
+                  Expanded(
+                      child: Text.rich(TextSpan(
+                          children:
+                              _controller.cameraHelperDescriptionWidget))),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class TakeKtpPreview extends StatelessWidget {
+  final MainController _mController = Get.find();
+
+  TakeKtpPreview({super.key});
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      if (_controller.isCameraReady) {
+      if (_mController.isCameraReady) {
         return Column(
           children: [
             Expanded(
                 child: CameraPreview(
-              _controller.camController!,
+              _mController.camController!,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Stack(
                   children: [
                     HeaderTakeKtp(),
-                    CameraTools(),
+                    TakeKtpCameraTools(),
                     KtpPreviewWidget(),
                   ],
                 ),
@@ -62,7 +99,7 @@ class TakeCameraPreview extends StatelessWidget {
 }
 
 class KtpPreviewWidget extends StatelessWidget {
-  final TakeCameraKtpController _controller = Get.find();
+  final TakeKtpController _controller = Get.find();
 
   KtpPreviewWidget({super.key});
 
@@ -100,10 +137,10 @@ class KtpPreviewWidget extends StatelessWidget {
   }
 }
 
-class CameraTools extends StatelessWidget {
-  final TakeCameraKtpController _controller = Get.find();
-
-  CameraTools({super.key});
+class TakeKtpCameraTools extends StatelessWidget {
+  final MainController _mController = Get.find();
+  final TakeKtpController _controller = Get.find();
+  TakeKtpCameraTools({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -119,12 +156,28 @@ class CameraTools extends StatelessWidget {
               height: 72,
               width: 72,
               child: GestureDetector(
-                onTap: _controller.takePicture(),
+                onTap: _mController.takePicture(
+                    pathName: "KTP",
+                    btnAccTitle: TakeKtpWord.fotoSudahSesuai.text,
+                    btnRejectTitle: TakeKtpWord.fotoUlang.text,
+                    onAccept: _controller.onAccept(),
+                    onReject: _controller.onReject(),
+                    onCompleteCamera: _controller.onCompleteCamera(),
+                    bottomDialogChild: Expanded(
+                      child: Text.rich(TextSpan(children: [
+                        TextSpan(
+                            text: TakeKtpWord.pastikanFoto.text,
+                            style: textStyleW500(fontSize: 12)),
+                        TextSpan(
+                            text: TakeKtpWord.sudahSesuai.text,
+                            style: textStyleW600(fontSize: 12))
+                      ])),
+                    )),
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   child: Image.asset(
                     takeCameraButtonAssets,
-                    color: ORANGE,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -133,12 +186,12 @@ class CameraTools extends StatelessWidget {
               height: 33.33,
               width: 33.33,
               child: GestureDetector(
-                onTap: _controller.changeCameraDirection(),
+                onTap: _mController.changeCameraDirection(),
                 child: CircleAvatar(
                   backgroundColor: Colors.transparent,
                   child: Image.asset(
                     flipCameraButtonAssets,
-                    color: ORANGE,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -147,62 +200,5 @@ class CameraTools extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class HeaderTakeKtp extends StatelessWidget {
-  final TakeCameraKtpController _controller = Get.find();
-
-  HeaderTakeKtp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 24),
-          child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            color: BLUE_LIGHT,
-            elevation: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ImageIcon(AssetImage(iAssets), color: BLUE_TEXT),
-                  const SizedBox(width: 9.67),
-                  Expanded(
-                      child: Text.rich(TextSpan(
-                          children:
-                              _controller.cameraHelperDescriptionWidget))),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class PreviewKtp extends StatelessWidget {
-  final MainController _mainController = Get.find();
-  PreviewKtp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return SAFE_AREA(
-        child: SCAFFOLD(
-            appBar: APPBAR(
-                onPressed: () => Get.back(),
-                title: TakeCameraKtpWord.registrasi.text,
-                progressData: 3),
-            body: Center(
-              child: Obx(() {
-                if (_mainController.ktpFilePath.isEmpty) return Container();
-                return Image.file(File(_mainController.ktpFilePath.value));
-              }),
-            )));
   }
 }
