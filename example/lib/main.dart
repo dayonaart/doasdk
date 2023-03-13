@@ -10,7 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  NewDoaSdk newDoaSdk = NewDoaSdk();
+  final newDoaSdk = NewDoaSdk();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

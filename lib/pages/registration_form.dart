@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newdoasdk/const_path.dart';
+import 'package:newdoasdk/controller/main_controller.dart';
 import 'package:newdoasdk/controller/registration_form_controller.dart';
 import 'package:newdoasdk/style/colors.dart';
 import 'package:newdoasdk/style/textstyle.dart';
@@ -108,6 +111,7 @@ class RegistrationFormField extends StatelessWidget {
 
 class RegistrationFormEditKtp extends StatelessWidget {
   final RegistrationFormController _controller = Get.find();
+  final MainController _mController = Get.find();
 
   RegistrationFormEditKtp({super.key});
 
@@ -117,7 +121,13 @@ class RegistrationFormEditKtp extends StatelessWidget {
       children: [
         const SizedBox(height: 8),
         Obx(() {
-          return _controller.ktpWidget.value;
+          return ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.file(
+                  File(_mController.getImagePath("Registrasi").value),
+                  height: 128,
+                  width: 191,
+                  fit: BoxFit.cover));
         }),
         const SizedBox(height: 20),
         OUTLINE_BUTTON(

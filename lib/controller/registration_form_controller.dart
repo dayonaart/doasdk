@@ -13,7 +13,6 @@ class RegistrationFormController extends GetxController {
   final MainController _mController = Get.find();
   String get _myKtpPath => "assets/my_ktp.JPG";
   RxBool enableEditing = RxBool(false);
-  Rx<Widget> ktpWidget = Rx(Container());
   DateTime? _selectedDob;
   final _now = DateTime.now();
   bool get _mature {
@@ -34,15 +33,6 @@ class RegistrationFormController extends GetxController {
     return () {
       enableEditing.value = !enableEditing.value;
     };
-  }
-
-  Future<void> cropKtpImage() async {
-    // var _crop = await _screenshotController
-    //     .captureFromWidget(Image.file(File(ktpPath), fit: BoxFit.cover));
-    ktpWidget.value = ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.file(File(_mController.getImagePath("Registrasi").value),
-            height: 128, width: 191, fit: BoxFit.cover));
   }
 
   void Function() datePicker() {
@@ -268,7 +258,6 @@ class RegistrationFormController extends GetxController {
   @override
   void onReady() async {
     _mController.startProgressAnim();
-    await cropKtpImage();
     super.onReady();
   }
 

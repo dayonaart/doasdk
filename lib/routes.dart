@@ -102,35 +102,110 @@ extension Page on ROUTE {
 
 List<GetPage> get routePage {
   return [
-    GetPage(name: ROUTE.onBoarding.name, page: () => OnBoarding()),
-    GetPage(name: ROUTE.previewTakeImage.name, page: () => PreviewTakeImage()),
-    GetPage(name: ROUTE.preRegister.name, page: () => const PreRegister()),
     GetPage(
-        name: ROUTE.openingAccount.name, page: () => const OpeningAccount()),
-    GetPage(name: ROUTE.openingTnc.name, page: () => OpeningTnc()),
-    GetPage(name: ROUTE.inputPhoneNumber.name, page: () => InputPhoneNumber()),
-    GetPage(name: ROUTE.accountType.name, page: () => AccountType()),
-    GetPage(name: ROUTE.preTakeKtp.name, page: () => PreTakeKtp()),
-    GetPage(name: ROUTE.takeKtp.name, page: () => TakeKtp()),
-    GetPage(name: ROUTE.registrationForm.name, page: () => RegistrationForm()),
+        name: ROUTE.onBoarding.name,
+        page: () {
+          return OnBoarding();
+        }),
+    GetPage(
+        name: ROUTE.previewTakeImage.name,
+        page: () {
+          return PreviewTakeImage();
+        }),
+    GetPage(
+        name: ROUTE.preRegister.name,
+        page: () {
+          return const PreRegister();
+        }),
+    GetPage(
+        name: ROUTE.openingAccount.name,
+        page: () {
+          return const OpeningAccount();
+        }),
+    GetPage(
+        name: ROUTE.openingTnc.name,
+        page: () {
+          return OpeningTnc();
+        }),
+    GetPage(
+        name: ROUTE.inputPhoneNumber.name,
+        page: () {
+          return InputPhoneNumber();
+        }),
+    GetPage(
+        name: ROUTE.accountType.name,
+        page: () {
+          return AccountType();
+        }),
+    GetPage(
+        name: ROUTE.preTakeKtp.name,
+        page: () {
+          return PreTakeKtp();
+        }),
+    GetPage(
+        name: ROUTE.takeKtp.name,
+        page: () {
+          return TakeKtp();
+        }),
+    GetPage(
+        name: ROUTE.registrationForm.name,
+        page: () {
+          return RegistrationForm();
+        }),
     GetPage(
         name: ROUTE.registrationFormPrivate.name,
-        page: () => RegistrationFormPrivate()),
+        page: () {
+          return RegistrationFormPrivate();
+        }),
     GetPage(
         name: ROUTE.registrationFormJobDetail.name,
-        page: () => RegistrationFormJobDetail()),
+        page: () {
+          return RegistrationFormJobDetail();
+        }),
     GetPage(
         name: ROUTE.registrationFormOfficeBranch.name,
-        page: () => RegistrationFormOfficeBranch()),
+        page: () {
+          return RegistrationFormOfficeBranch();
+        }),
     GetPage(
         name: ROUTE.livenessVerification.name,
-        page: () => LivenessVerification()),
-    GetPage(name: ROUTE.selfieAndKtp.name, page: () => SelfieAndKtp()),
-    GetPage(name: ROUTE.preTakeSignature.name, page: () => PreTakeSignature()),
-    GetPage(name: ROUTE.takeSignature.name, page: () => TakeSignature()),
-    GetPage(name: ROUTE.preTakeNpwp.name, page: () => PreTakeNpwp()),
-    GetPage(name: ROUTE.takeNpwp.name, page: () => TakeNpwp()),
-    GetPage(name: ROUTE.photoValidation.name, page: () => PhotoValidation()),
-    GetPage(name: ROUTE.dataVerification.name, page: () => DataVerification()),
+        page: () {
+          return LivenessVerification();
+        }),
+    GetPage(
+        name: ROUTE.selfieAndKtp.name,
+        page: () {
+          return SelfieAndKtp();
+        }),
+    GetPage(
+        name: ROUTE.preTakeSignature.name,
+        page: () {
+          return PreTakeSignature();
+        }),
+    GetPage(
+        name: ROUTE.takeSignature.name,
+        page: () {
+          return TakeSignature();
+        }),
+    GetPage(
+        name: ROUTE.preTakeNpwp.name,
+        page: () {
+          return PreTakeNpwp();
+        }),
+    GetPage(
+        name: ROUTE.takeNpwp.name,
+        page: () {
+          return TakeNpwp();
+        }),
+    GetPage(
+        name: ROUTE.photoValidation.name,
+        page: () {
+          return PhotoValidation();
+        }),
+    GetPage(
+        name: ROUTE.dataVerification.name,
+        page: () {
+          return DataVerification();
+        }),
   ];
 }

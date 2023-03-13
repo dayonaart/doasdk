@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:newdoasdk/widget/widgets.dart';
+import 'package:image/image.dart' as img;
 
 class MainController extends GetxController
     with GetSingleTickerProviderStateMixin, WidgetsBindingObserver {
@@ -10,21 +14,15 @@ class MainController extends GetxController
   bool isCameraReady = false;
   late AnimationController progresscontroller;
   RxDouble progress = 0.0.obs;
-  RxString _ktpFilePath = RxString("");
-  RxString _selfieKtpPath = RxString("");
-  RxString _signatureFilePath = RxString("");
-  RxString _npwpFilePath = RxString("");
+  final RxString _ktpFilePath = RxString("");
+  final RxString _selfieKtpPath = RxString("");
+  final RxString _signatureFilePath = RxString("");
+  final RxString _npwpFilePath = RxString("");
   RxMap inputNumberData = RxMap();
   RxMap privateFormData = RxMap();
   RxMap jobDetailFormData = RxMap();
   RxMap ktpData = RxMap();
 
-  List<String> get getFileList => RxList([
-        _ktpFilePath.value,
-        _selfieKtpPath.value,
-        _signatureFilePath.value,
-        _npwpFilePath.value
-      ]);
   RxString getImagePath(String pathName) {
     if (pathName.contains("Registrasi")) {
       return _ktpFilePath;
@@ -79,7 +77,6 @@ class MainController extends GetxController
     await camController?.initialize().then((_) async {
       isCameraReady = (camController != null);
       if (isCameraReady) {
-        // var _maxZoom = await camController!.getMaxZoomLevel();
         camController!.setFlashMode(FlashMode.off);
       }
       update();
@@ -134,9 +131,13 @@ class MainController extends GetxController
       try {
         var _xFile = await camController?.takePicture();
         if (_xFile != null) {
+          if (pathName != "Foto Selfie") {
+            await cropImage(_xFile.path, isKtp: pathName == "KTP");
+          }
           setImageFilePath(_xFile.path, pathName!);
           onCompleteCamera?.call();
           await Future.delayed(const Duration(milliseconds: 500));
+
           await BOTTOM_DIALOG_CONFIRMATION(
               btnAccTitle: btnAccTitle,
               btnRejectTitle: btnRejectTitle,
@@ -153,6 +154,25 @@ class MainController extends GetxController
         DIALOG_HELPER("$e");
       }
     };
+  }
+
+  Future<File> cropImage(
+    String path, {
+    bool isKtp = false,
+  }) async {
+    var bytes = await File(path).readAsBytes();
+    img.Image? src = img.decodeImage(bytes);
+
+    var cropSize = min(src!.width, src.height);
+    int offsetX = (src.width - min(src.width, src.height)) ~/ 2;
+    int offsetY = (src.height - min(src.width, src.height)) ~/ 3.5;
+    var _img = img.copyCrop(src,
+        x: offsetX,
+        y: offsetY,
+        width: cropSize,
+        height: cropSize ~/ (isKtp ? 1.5 : 1.2));
+    var jpg = img.encodeJpg(_img);
+    return await File(path).writeAsBytes(jpg);
   }
 
   void startProgressAnim() {

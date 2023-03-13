@@ -28,6 +28,44 @@ class TakeKtp extends StatelessWidget {
   }
 }
 
+class TakeKtpPreview extends StatelessWidget {
+  final MainController _mController = Get.find();
+
+  TakeKtpPreview({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Builder(builder: (context) {
+      if (_mController.isCameraReady) {
+        return Column(
+          children: [
+            Expanded(
+                child: CameraPreview(
+              _mController.camController!,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        HeaderTakeKtp(),
+                        const SizedBox(height: 56),
+                        KtpPreviewWidget(),
+                      ],
+                    ),
+                    TakeKtpCameraTools(),
+                  ],
+                ),
+              ),
+            )),
+          ],
+        );
+      } else {
+        return Container();
+      }
+    });
+  }
+}
+
 class HeaderTakeKtp extends StatelessWidget {
   final TakeKtpController _controller = Get.find();
 
@@ -65,39 +103,6 @@ class HeaderTakeKtp extends StatelessWidget {
   }
 }
 
-class TakeKtpPreview extends StatelessWidget {
-  final MainController _mController = Get.find();
-
-  TakeKtpPreview({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      if (_mController.isCameraReady) {
-        return Column(
-          children: [
-            Expanded(
-                child: CameraPreview(
-              _mController.camController!,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Stack(
-                  children: [
-                    HeaderTakeKtp(),
-                    TakeKtpCameraTools(),
-                    KtpPreviewWidget(),
-                  ],
-                ),
-              ),
-            )),
-          ],
-        );
-      } else {
-        return Container();
-      }
-    });
-  }
-}
-
 class KtpPreviewWidget extends StatelessWidget {
   final TakeKtpController _controller = Get.find();
 
@@ -105,34 +110,30 @@ class KtpPreviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          DashedRect(
-            color: Colors.white,
-            height: _controller.boxHeight,
-            width: Get.width,
+    return Stack(
+      alignment: AlignmentDirectional.bottomCenter,
+      children: [
+        DashedRect(
+          color: Colors.white,
+          height: _controller.boxHeight,
+          width: Get.width,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Expanded(
+                  flex: 2, child: DashedRect(height: 30, color: Colors.white)),
+              const SizedBox(width: 17),
+              DashedRect(
+                  width: _controller.boxWidth / 3,
+                  height: _controller.boxHeight / 1.5,
+                  color: Colors.white),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Expanded(
-                    flex: 2,
-                    child: DashedRect(height: 30, color: Colors.white)),
-                const SizedBox(width: 17),
-                DashedRect(
-                    width: _controller.boxWidth / 3,
-                    height: _controller.boxHeight / 1.5,
-                    color: Colors.white),
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

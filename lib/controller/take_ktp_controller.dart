@@ -12,6 +12,8 @@ class TakeKtpController extends GetxController {
   double boxHeight = 248;
   double boxWidth = 365;
   double previewAspectRatio = 0.5;
+  GlobalKey camKey = GlobalKey();
+
   List<TextSpan> get cameraHelperDescriptionWidget {
     return TakeKtpWord.pastikanPosisi.text.split("").map((e) {
       if (RegExp(r'[&]', caseSensitive: true).hasMatch(e)) {
