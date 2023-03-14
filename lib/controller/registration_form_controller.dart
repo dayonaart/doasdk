@@ -1,19 +1,19 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/routes.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/routes.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/utils.dart';
 
 class RegistrationFormController extends GetxController {
   final MainController _mController = Get.find();
   String get _myKtpPath => "assets/my_ktp.JPG";
   RxBool enableEditing = RxBool(false);
   DateTime? _selectedDob;
+  Rx<Widget?> ktpWidget = Rx(null);
   final _now = DateTime.now();
   bool get _mature {
     try {
@@ -28,6 +28,7 @@ class RegistrationFormController extends GetxController {
       fullNameTextController,
       dobTextController,
       referalCodeTextController;
+  late List<FocusNode> focusNode;
   late List<RxBool> validationForm;
   void Function() enableOnEditTextField() {
     return () {
@@ -186,6 +187,15 @@ class RegistrationFormController extends GetxController {
     }
   }
 
+  void Function()? onCompleteEditing(int i) {
+    return () {
+      if (i == 1) {
+        datePicker().call();
+      }
+      focusNode[i].nextFocus();
+    };
+  }
+
   TextInputType? textInputType(int i) {
     switch (i) {
       case 0:
@@ -243,12 +253,22 @@ class RegistrationFormController extends GetxController {
     }
   }
 
+  Future<void> _getcropImage() async {
+    var _cropedImage =
+        await _mController.cropImage(_mController.ktpFile.value, isKtp: true);
+    ktpWidget.value = ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Image.memory(_cropedImage!,
+            height: 128, width: 191, fit: BoxFit.cover));
+  }
+
   @override
   void onInit() {
     nikTextController = TextEditingController();
     fullNameTextController = TextEditingController();
     dobTextController = TextEditingController();
     referalCodeTextController = TextEditingController();
+    focusNode = List.generate(4, (i) => FocusNode());
     validationForm = List.generate(3, (i) {
       return RxBool(false);
     });
@@ -258,6 +278,7 @@ class RegistrationFormController extends GetxController {
   @override
   void onReady() async {
     _mController.startProgressAnim();
+    await _getcropImage();
     super.onReady();
   }
 

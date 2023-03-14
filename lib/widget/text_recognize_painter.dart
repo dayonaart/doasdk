@@ -3,8 +3,8 @@
 
 // import 'package:flutter/material.dart';
 // import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-// import 'package:newdoasdk/style/colors.dart';
-// import 'package:newdoasdk/widget/coordinates_translator.dart';
+// import 'package:doasdk/style/colors.dart';
+// import 'package:doasdk/widget/coordinates_translator.dart';
 
 // class TextRecognizerPainter extends CustomPainter {
 //   TextRecognizerPainter(

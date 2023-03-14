@@ -2,13 +2,15 @@ import 'package:drop_down_list/drop_down_list.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/api/api.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/routes.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
+import 'package:doasdk/api/api.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/routes.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
 import 'dart:math' as math;
+
+import 'package:doasdk/utils.dart';
 
 class RegistrationFormPrivateController extends GetxController {
   final MainController _mController = Get.find();
@@ -54,7 +56,7 @@ class RegistrationFormPrivateController extends GetxController {
       npwpTxtController, //17
       maritalStatusTxtController, //18
       mothersNameTxtController; //19
-
+  late List<FocusNode> focusNode;
   Widget textEditingLabel(int i) {
     switch (i != 16 && i != 17) {
       case true:
@@ -232,6 +234,17 @@ class RegistrationFormPrivateController extends GetxController {
       default:
         return null;
     }
+  }
+
+  void Function()? onCompleteEditing(int i) {
+    return () {
+      // if (i == 10) {
+      //   focusNode[i].unfocus();
+      //   onFieldTap(i)?.call();
+      //   return;
+      // }
+      // focusNode[i].nextFocus();
+    };
   }
 
   final List<String> genderItems = [
@@ -495,6 +508,7 @@ class RegistrationFormPrivateController extends GetxController {
     npwpTxtController = TextEditingController();
     maritalStatusTxtController = TextEditingController();
     mothersNameTxtController = TextEditingController();
+    focusNode = List.generate(20, (i) => FocusNode());
     super.onInit();
   }
 

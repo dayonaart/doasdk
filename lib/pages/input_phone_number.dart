@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/input_phone_number_controller.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/controller/input_phone_number_controller.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
 import 'dart:math' as math;
 
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class InputPhoneNumber extends StatelessWidget {
   InputPhoneNumber({super.key});

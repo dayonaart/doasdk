@@ -1,6 +1,6 @@
-# newdoasdk_example
+# doasdk_example
 
-Demonstrates how to use the newdoasdk plugin.
+Demonstrates how to use the doasdk plugin.
 
 ## Getting Started
 

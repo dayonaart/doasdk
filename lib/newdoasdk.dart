@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/pages/unknown_route.dart';
-import 'package:newdoasdk/routes.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/pages/unknown_route.dart';
+import 'package:doasdk/routes.dart';
 
-class NewDoaSdk {
+class DoaSdk {
   /// Untuk dapat terhubung dengan ZOLOZ SDK dengan koneksi local berikan param dengan format ip:port
   ///
   /// contoh 192.168.100.100:8080

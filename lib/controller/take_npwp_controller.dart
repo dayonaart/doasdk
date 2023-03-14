@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/routes.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/routes.dart';
 
 class TakeNpwpController extends GetxController {
   final MainController _mController = Get.find();

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
 
 SafeArea SAFE_AREA({
   @required Widget? child,

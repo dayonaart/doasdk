@@ -1,4 +1,4 @@
-# newdoasdk
+# doasdk
 
 A new Flutter plugin project.
 

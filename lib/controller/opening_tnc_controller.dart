@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/dummies_data/dummies.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/routes.dart';
+import 'package:doasdk/dummies_data/dummies.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/routes.dart';
 import 'dart:math' as math;
 
-import 'package:newdoasdk/style/colors.dart';
+import 'package:doasdk/style/colors.dart';
 
 class OpeningTncController extends GetxController
     with GetTickerProviderStateMixin {

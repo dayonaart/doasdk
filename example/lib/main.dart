@@ -1,6 +1,6 @@
+import 'package:doasdk/newdoasdk.dart';
 import 'package:flutter/material.dart';
-import 'package:newdoasdk/newdoasdk.dart';
-import 'package:newdoasdk/routes.dart';
+import 'package:doasdk/routes.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -10,7 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final newDoaSdk = NewDoaSdk();
+  final doaSdk = DoaSdk();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () async {
-              newDoaSdk.setZolozBaseUrl("192.168.158.204:9000");
-              newDoaSdk.setRecaptchaSiteKey(
+              doaSdk.setZolozBaseUrl("192.168.228.204:8080");
+              doaSdk.setRecaptchaSiteKey(
                   "6LcS0egkAAAAAMY8KtKzgWr7dT8axb-hK9o4RFSK");
-              newDoaSdk.runSdk(context, route: ROUTE.onBoarding.name);
+              doaSdk.runSdk(context, route: ROUTE.onBoarding.name);
             },
             child: const Text("data")),
       ),

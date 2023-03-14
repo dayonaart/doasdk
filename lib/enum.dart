@@ -1,35 +1,3 @@
-extension PersonNameValidator on String {
-  bool isNotValidPersonName() {
-    return RegExp(r'[{}+!@#$%^&*()?><,./\;@=_0-9-]').hasMatch(this);
-  }
-}
-
-extension OnlyTextAndNumberValidator on String {
-  bool isValidTextAndNumber() {
-    return RegExp(r'[{}+!@#$%^&*()?><,./\;@=_-]').hasMatch(this);
-  }
-}
-
-extension EmailValidator on String {
-  bool isValidEmail() {
-    return RegExp(
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-        .hasMatch(this);
-  }
-}
-
-extension PhoneValidator on String {
-  bool isValidPhone() {
-    return RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)').hasMatch(this);
-  }
-}
-
-extension NpwpValidator on String {
-  bool isValidNpwp() {
-    return RegExp(r'(^(?:[+0]9)?[0-9]{16}$)').hasMatch(this);
-  }
-}
-
 enum OnBoardingWord {
   tungguApalagi,
   nikmatiKemudahanDenganBNIAgen46,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/routes.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/routes.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
 
 class TakeKtpController extends GetxController {
   final MainController _mController = Get.find();

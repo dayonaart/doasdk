@@ -137,6 +137,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.1"
+  doasdk:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.3"
   drop_down_list:
     dependency: transitive
     description:
@@ -257,13 +264,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
-  newdoasdk:
-    dependency: "direct main"
-    description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.0.2"
   path:
     dependency: transitive
     description:

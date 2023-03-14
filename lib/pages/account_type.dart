@@ -1,12 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/account_type_controller.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/controller/account_type_controller.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/widget/widgets.dart';
 import 'dart:math' as math;
 
 class AccountType extends StatelessWidget {

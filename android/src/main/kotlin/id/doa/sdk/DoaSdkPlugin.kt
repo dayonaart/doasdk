@@ -1,4 +1,4 @@
-package id.doa.newdoasdk
+package id.doa.sdk
 
 import android.app.Activity
 import android.content.Context
@@ -18,15 +18,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-/** NewdoasdkPlugin */
-class NewDoaSdkPlugin: FlutterPlugin, MethodCallHandler ,ActivityAware{
+/** doasdkPlugin */
+class DoaSdkPlugin: FlutterPlugin, MethodCallHandler ,ActivityAware{
   private lateinit var channel : MethodChannel
   private lateinit var context: Context
   private lateinit var activity: Activity
   private lateinit var siteKey:String
   private lateinit var recaptchaClient: RecaptchaClient
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "newdoasdk")
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "doasdk")
     channel.setMethodCallHandler(this)
     context = flutterPluginBinding.applicationContext
   }

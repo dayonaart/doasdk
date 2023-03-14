@@ -1,4 +1,4 @@
-group 'id.doa.newdoasdk'
+group 'id.doa.doasdk'
 version '1.0-SNAPSHOT'
 
 buildscript {

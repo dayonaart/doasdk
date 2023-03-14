@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class PreviewTakeImage extends StatelessWidget {
   final MainController _mainController = Get.find();
@@ -19,21 +19,23 @@ class PreviewTakeImage extends StatelessWidget {
       appBar:
           APPBAR(onPressed: null, title: _args.first, progressData: _args.last),
       body: Obx(() {
-        if (_mainController.getImagePath(_args.first).isEmpty) {
-          return Container();
-        }
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.file(
-                  File(_mainController.getImagePath(_args.first).value),
-                  height: Get.height / 3,
-                  fit: BoxFit.cover)),
-        );
-        // Image.file(
-        //     File(_mainController.getImagePath(_args.first).value));
+        return Image.file(_previewImage.value!);
       }),
     ));
+  }
+
+  Rx<File?> get _previewImage {
+    switch (_args.first) {
+      case "Registrasi":
+        return _mainController.ktpFile;
+      case "Foto Selfie dengan KTP":
+        return _mainController.selfieFile;
+      case "Foto Tanda Tangan":
+        return _mainController.signatureFile;
+      case "Foto NPWP":
+        return _mainController.npwpFile;
+      default:
+        return Rx(null);
+    }
   }
 }

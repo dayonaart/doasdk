@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/controller/opening_tnc_controller.dart';
-import 'package:newdoasdk/dummies_data/dummies.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/controller/opening_tnc_controller.dart';
+import 'package:doasdk/dummies_data/dummies.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class OpeningTnc extends StatelessWidget {
   OpeningTnc({super.key});

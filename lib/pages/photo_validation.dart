@@ -1,14 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/controller/photo_validation_controller.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/controller/photo_validation_controller.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class PhotoValidation extends StatelessWidget {
   PhotoValidation({super.key});
@@ -31,24 +32,38 @@ class PhotoValidation extends StatelessWidget {
                 children: [
                   const PhotoValidationHeader(),
                   const SizedBox(height: 16),
-                  FileViewer("Foto Selfie dengan KTP",
-                      _mController.getImagePath("Foto Selfie").value, () {}),
+                  Obx(() {
+                    if (_controller.selfieFile.value == null) {
+                      return const CircularProgressIndicator();
+                    }
+                    return FileViewer("Foto Selfie dengan KTP",
+                        _controller.selfieFile.value, () {});
+                  }),
                   const SizedBox(height: 32),
-                  Row(
-                    children: List.generate(2, (i) {
-                      return Expanded(
-                        child: FileViewer(
-                            i == 0 ? "Tanda Tangan" : "NPWP (Opsional)",
-                            i == 1
-                                ? _mController
-                                    .getImagePath("Tanda Tangan")
-                                    .value
-                                : _mController.getImagePath("NPWP").value,
-                            boxHeight: 128,
-                            () {}),
-                      );
-                    }),
-                  ),
+                  Obx(() {
+                    if (_controller.signatureCrop.value == null ||
+                        _controller.npwpCrop.value == null) {
+                      return const CircularProgressIndicator();
+                    }
+                    return Row(
+                      children: [
+                        Expanded(
+                            child: FileViewer(
+                          "Tanda Tangan",
+                          _controller.signatureCrop.value,
+                          () {},
+                          boxHeight: 128,
+                        )),
+                        Expanded(
+                            child: FileViewer(
+                          "NPWP (Opsional)",
+                          _controller.npwpCrop.value,
+                          () {},
+                          boxHeight: 128,
+                        ))
+                      ],
+                    );
+                  })
                 ],
               ),
             )),
@@ -71,13 +86,13 @@ class PhotoValidation extends StatelessWidget {
 
 class FileViewer extends StatelessWidget {
   final String? title;
-  final String? imagePath;
+  final Uint8List? uint8list;
   final double boxHeight;
   final void Function()? onChange;
 
   const FileViewer(
     this.title,
-    this.imagePath,
+    this.uint8list,
     this.onChange, {
     super.key,
     this.boxHeight = 200,
@@ -95,7 +110,7 @@ class FileViewer extends StatelessWidget {
               const SizedBox(height: 21.38),
               ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.file(File(imagePath!),
+                  child: Image.memory(uint8list!,
                       height: boxHeight, width: 181, fit: BoxFit.cover)),
               const SizedBox(height: 16),
               OUTLINE_BUTTON(

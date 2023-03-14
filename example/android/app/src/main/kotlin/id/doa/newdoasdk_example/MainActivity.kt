@@ -1,4 +1,4 @@
-package id.doa.newdoasdk_example
+package id.doa.doasdk_example
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/controller/registration_form_private_controller.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/pages/registration_form.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/controller/registration_form_private_controller.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/pages/registration_form.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class RegistrationFormPrivate extends StatelessWidget {
   RegistrationFormPrivate({super.key});
@@ -86,6 +86,9 @@ class PrivateRegistrationField extends StatelessWidget {
                                   onChanged: _controller.onChangeForm(i),
                                   keyboardType: _controller.textInputType(i),
                                   onTap: _controller.onFieldTap(i),
+                                  focusNode: _controller.focusNode[i],
+                                  // onEditingComplete:
+                                  //     _controller.onCompleteEditing(i),
                                   decoration: _controller.inputDecoration(i),
                                   style: textStyleW500(
                                       fontSize: 16,
@@ -148,11 +151,13 @@ class PrivateRegistrationRtRwField extends StatelessWidget {
                   _controller.textEditingLabel(index == 0 ? i : 6),
                   const SizedBox(height: 8),
                   TextFormField(
+                      focusNode: _controller.focusNode[i],
                       autovalidateMode: AutovalidateMode.always,
                       validator: _controller.onValidateForm(index == 0 ? i : 6),
                       onChanged: _controller.onChangeForm(index == 0 ? i : 6),
                       keyboardType: _controller.textInputType(i),
                       onTap: _controller.onFieldTap(index == 0 ? i : 6),
+                      // onEditingComplete: _controller.onCompleteEditing(i),
                       decoration:
                           _controller.inputDecoration(index == 0 ? i : 6),
                       style: textStyleW500(fontSize: 16),

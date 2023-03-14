@@ -1,12 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/controller/take_signature_controller.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/controller/take_signature_controller.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class TakeSignature extends StatelessWidget {
   TakeSignature({super.key});
@@ -135,7 +135,7 @@ class SignatureCameraTools extends StatelessWidget {
               width: 72,
               child: GestureDetector(
                 onTap: _mController.takePicture(
-                    pathName: "SIGNATURE",
+                    fileName: "SIGNATURE",
                     btnAccTitle: "Foto sudah sesuai",
                     btnRejectTitle: "Foto Ulang",
                     onAccept: _controller.onAccept(),

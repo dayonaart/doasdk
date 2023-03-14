@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'package:dio/dio.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class Api {
   final BaseOptions _baseOptions = BaseOptions(

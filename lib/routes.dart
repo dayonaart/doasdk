@@ -1,25 +1,25 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:newdoasdk/pages/account_type.dart';
-import 'package:newdoasdk/pages/data_verification.dart';
-import 'package:newdoasdk/pages/liveness_verification.dart';
-import 'package:newdoasdk/pages/photo_validation.dart';
-import 'package:newdoasdk/pages/input_phone_number.dart';
-import 'package:newdoasdk/pages/pretake_ktp.dart';
-import 'package:newdoasdk/pages/onboarding.dart';
-import 'package:newdoasdk/pages/opening_account.dart';
-import 'package:newdoasdk/pages/opening_tnc.dart';
-import 'package:newdoasdk/pages/preregister.dart';
-import 'package:newdoasdk/pages/pretake_npwp.dart';
-import 'package:newdoasdk/pages/preview_take_image_camera.dart';
-import 'package:newdoasdk/pages/registration_form.dart';
-import 'package:newdoasdk/pages/registration_form_job_detail.dart';
-import 'package:newdoasdk/pages/registration_form_office_branch.dart';
-import 'package:newdoasdk/pages/registration_form_private.dart';
-import 'package:newdoasdk/pages/selfie_and_ktp.dart';
-import 'package:newdoasdk/pages/take_ktp.dart';
-import 'package:newdoasdk/pages/pretake_signature.dart';
-import 'package:newdoasdk/pages/take_npwp.dart';
-import 'package:newdoasdk/pages/take_signature.dart';
+import 'package:doasdk/pages/account_type.dart';
+import 'package:doasdk/pages/data_verification.dart';
+import 'package:doasdk/pages/liveness_verification.dart';
+import 'package:doasdk/pages/photo_validation.dart';
+import 'package:doasdk/pages/input_phone_number.dart';
+import 'package:doasdk/pages/pretake_ktp.dart';
+import 'package:doasdk/pages/onboarding.dart';
+import 'package:doasdk/pages/opening_account.dart';
+import 'package:doasdk/pages/opening_tnc.dart';
+import 'package:doasdk/pages/preregister.dart';
+import 'package:doasdk/pages/pretake_npwp.dart';
+import 'package:doasdk/pages/preview_take_image_camera.dart';
+import 'package:doasdk/pages/registration_form.dart';
+import 'package:doasdk/pages/registration_form_job_detail.dart';
+import 'package:doasdk/pages/registration_form_office_branch.dart';
+import 'package:doasdk/pages/registration_form_private.dart';
+import 'package:doasdk/pages/selfie_and_ktp.dart';
+import 'package:doasdk/pages/take_ktp.dart';
+import 'package:doasdk/pages/pretake_signature.dart';
+import 'package:doasdk/pages/take_npwp.dart';
+import 'package:doasdk/pages/take_signature.dart';
 
 enum ROUTE {
   onBoarding,

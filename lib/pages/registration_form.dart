@@ -1,13 +1,14 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/controller/registration_form_controller.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/controller/registration_form_controller.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class RegistrationForm extends StatelessWidget {
   RegistrationForm({super.key});
@@ -76,6 +77,7 @@ class RegistrationFormField extends StatelessWidget {
                       _controller.textEditingLabel(i),
                       Obx(() {
                         return TextFormField(
+                          focusNode: _controller.focusNode[i],
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           readOnly: i == 2,
                           onTap: i != 2 ? null : _controller.datePicker(),
@@ -83,6 +85,7 @@ class RegistrationFormField extends StatelessWidget {
                               ? TextCapitalization.words
                               : TextCapitalization.none,
                           keyboardType: _controller.textInputType(i),
+                          onEditingComplete: _controller.onCompleteEditing(i),
                           onChanged: _controller.formOnChange(i),
                           validator: _controller.formValidator(i),
                           enabled: _controller.enableEditing.value,
@@ -121,13 +124,11 @@ class RegistrationFormEditKtp extends StatelessWidget {
       children: [
         const SizedBox(height: 8),
         Obx(() {
-          return ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.file(
-                  File(_mController.getImagePath("Registrasi").value),
-                  height: 128,
-                  width: 191,
-                  fit: BoxFit.cover));
+          if (_controller.ktpWidget.value != null) {
+            return _controller.ktpWidget.value!;
+          } else {
+            return Container();
+          }
         }),
         const SizedBox(height: 20),
         OUTLINE_BUTTON(

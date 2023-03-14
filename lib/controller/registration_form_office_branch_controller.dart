@@ -3,17 +3,18 @@ import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/api/api.dart';
-import 'package:newdoasdk/const_path.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/controller/registration_form_private_controller.dart';
-import 'package:newdoasdk/enum.dart';
-import 'package:newdoasdk/routes.dart';
-import 'package:newdoasdk/style/colors.dart';
-import 'package:newdoasdk/style/textstyle.dart';
+import 'package:doasdk/api/api.dart';
+import 'package:doasdk/const_path.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/controller/registration_form_private_controller.dart';
+import 'package:doasdk/enum.dart';
+import 'package:doasdk/routes.dart';
+import 'package:doasdk/style/colors.dart';
+import 'package:doasdk/style/textstyle.dart';
+import 'package:doasdk/utils.dart';
 import 'dart:math' as math;
 
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/widget/widgets.dart';
 
 class RegistrationFormOfficeBranchController extends GetxController {
   final MainController _mController = Get.find();
@@ -281,7 +282,7 @@ class RegistrationFormOfficeBranchController extends GetxController {
     return () async {
       try {
         _recaptchaLoading.value = true;
-        const _methodChannel = MethodChannel('newdoasdk');
+        const _methodChannel = MethodChannel('doasdk');
         final _res = await _methodChannel.invokeMethod<String>(
             'validationRecaptcha', recaptchaSiteKey);
         if (_res == "Success") {

@@ -1,6 +1,6 @@
-name: newdoasdk
+name: doasdk
 description: A new Doa SDK
-version: 0.0.2
+version: 0.0.3
 homepage:
 publish_to : none
 environment:
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # plugin_platform_interface: ^2.0.2
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   dio: ^5.0.1
@@ -46,10 +45,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: id.doa.newdoasdk
-        pluginClass: NewDoaSdkPlugin
+        package: id.doa.sdk
+        pluginClass: DoaSdkPlugin
       ios:
-        pluginClass: NewDoaSdkPlugin
+        pluginClass: DoaSdkPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   assets:

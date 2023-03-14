@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:newdoasdk/api/api.dart';
-import 'package:newdoasdk/controller/main_controller.dart';
-import 'package:newdoasdk/model/zoloz_model.dart';
-import 'package:newdoasdk/routes.dart';
-import 'package:newdoasdk/widget/widgets.dart';
+import 'package:doasdk/api/api.dart';
+import 'package:doasdk/controller/main_controller.dart';
+import 'package:doasdk/model/zoloz_model.dart';
+import 'package:doasdk/routes.dart';
+import 'package:doasdk/widget/widgets.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'package:zolozkit_for_flutter/zolozkit_for_flutter.dart';
 
@@ -37,6 +37,7 @@ class LivenessVerificationController extends GetxController {
       String? configPath = await ZolozkitForFlutter.zolozChameleonConfigPath;
       String? local = await ZolozkitForFlutter.zolozLocale;
       var _initPayload = await _initializePayload();
+
       var _res =
           await Api().POST("realid/initialize", payload: _initPayload.toJson());
       if (_res == null) return;

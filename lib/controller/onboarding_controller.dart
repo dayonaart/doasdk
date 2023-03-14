@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:newdoasdk/routes.dart';
-import 'package:newdoasdk/style/colors.dart';
+import 'package:doasdk/routes.dart';
+import 'package:doasdk/style/colors.dart';
 
 class OnBoardingController extends GetxController {
   RxInt corouselIndex = 0.obs;

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="id.doa.newdoasdk_example">
+    package="id.doa.doasdk_example">
    <application
-        android:label="newdoasdk_example"
+        android:label="doasdk_example"
         android:name="${applicationName}"
         android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@mipmap/ic_launcher">
